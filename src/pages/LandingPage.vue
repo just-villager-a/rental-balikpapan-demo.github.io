@@ -15,7 +15,7 @@ import iphoneLogo from '../../assets/brand/sewa-iphone-logo.jpg'
 
 const demo = useDemoStore(); const route = useRoute(); const router = useRouter()
 const featured = ref<CatalogItemView[]>([]); const loading = ref(true); const error = ref(false)
-function mode(): PreviewMode { return route.query.preview === 'loading' ? 'loading' : route.query.preview === 'error' ? 'error' : 'normal' }
+function mode(): PreviewMode { return route.query.preview === 'loading' || demo.activeScenario?.mode === 'loading' ? 'loading' : route.query.preview === 'error' || demo.activeScenario?.mode === 'recoverable_error' ? 'error' : 'normal' }
 async function load() { loading.value = true; error.value = false; try { featured.value = await getFeaturedItems(DEFAULT_PERIOD, mode()) } catch { error.value = true } finally { loading.value = false } }
 function search(period: RentalPeriod, category: string) { const filters = { ...DEFAULT_FILTERS, categories: category ? [category] : [] }; router.push({ name: 'search', query: serializeSearchQuery({ period, filters }) }) }
 onMounted(() => { demo.hydrate(); load() })

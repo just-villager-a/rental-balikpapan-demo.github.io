@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { PhCalendarBlank, PhCheckCircle, PhIdentificationCard, PhLockSimple, PhMapPin } from '@phosphor-icons/vue'
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CustomerLayout from '@/layouts/CustomerLayout.vue'
 import ProductMedia from '@/components/ProductMedia.vue'
 import StatePanel from '@/components/StatePanel.vue'
-import { checkoutContactSchema, createBooking, getCheckoutDraft } from '@/services/booking'
+import { checkoutContactSchema, createBooking, getCheckoutDraft, getPreservedCheckout, preserveCheckout } from '@/services/booking'
 import { getDemoStateService } from '@/services/mockServices'
 import { useDemoStore } from '@/stores/demo'
 import { formatIdr } from '@/utils/currency'
@@ -15,20 +15,27 @@ import { parseCheckoutQuery } from '@/utils/checkoutQuery'
 const route = useRoute(); const router = useRouter(); const demo = useDemoStore()
 const selection = computed(() => parseCheckoutQuery(route.query)); const draft = computed(() => selection.value ? getCheckoutDraft(selection.value) : undefined)
 const form = reactive({ name: 'Raka Demo', whatsapp: '+628110000001', email: 'raka@example.test', note: '', termsAccepted: false })
-const errors = reactive<Record<string, string>>({}); const submitting = ref(false); const conflict = ref(false)
+const errors = reactive<Record<string, string>>({}); const submitting = ref(false); const errorSummary = ref<HTMLElement>(); const submissionToken = crypto.randomUUID()
 const policy = computed(() => demo.state?.locationAndPolicyCopy ?? getDemoStateService().snapshot().locationAndPolicyCopy)
-function submit() {
-  Object.keys(errors).forEach(key => delete errors[key]); conflict.value = false
+async function submit() {
+  if (submitting.value) return
+  Object.keys(errors).forEach(key => delete errors[key])
   const parsed = checkoutContactSchema.safeParse(form)
-  if (!parsed.success) { parsed.error.issues.forEach(issue => { errors[String(issue.path[0])] ??= issue.message }); return }
+  if (!parsed.success) { parsed.error.issues.forEach(issue => { errors[String(issue.path[0])] ??= issue.message }); await nextTick(); errorSummary.value?.focus(); return }
   if (!selection.value) return
   submitting.value = true
-  const result = createBooking({ ...selection.value, customer: { name: parsed.data.name, whatsapp: parsed.data.whatsapp, email: parsed.data.email || undefined }, note: parsed.data.note || undefined, termsAccepted: true })
+  const customer = { name: parsed.data.name, whatsapp: parsed.data.whatsapp, email: parsed.data.email || undefined }
+  const result = createBooking({ ...selection.value, customer, note: parsed.data.note || undefined, termsAccepted: true, submissionToken })
   submitting.value = false
-  if (!result.ok) { conflict.value = result.reason === 'unavailable'; return }
+  if (!result.ok) { preserveCheckout({ selection: selection.value, customer, note: parsed.data.note || undefined }); router.push({ name: 'checkout-conflict', query: route.query }); return }
   router.push({ name: 'demo-payment', params: { bookingId: result.booking.id } })
 }
-onMounted(() => demo.hydrate())
+onMounted(() => {
+  demo.hydrate()
+  if (!selection.value || !draft.value) { router.replace({ name: 'search', query: { notice: 'invalid_checkout' } }); return }
+  const preserved = getPreservedCheckout()
+  if (preserved && selection.value.itemId === preserved.selection.itemId) Object.assign(form, preserved.customer, { note: preserved.note ?? '' })
+})
 </script>
 <template>
   <CustomerLayout>
@@ -36,7 +43,7 @@ onMounted(() => demo.hydrate())
       <StatePanel v-if="!selection || !draft" state="not-found" title="Pilihan booking belum tersedia" message="Pilih produk dan periode sewa dari katalog sebelum membuka checkout." />
       <template v-else>
         <div class="mb-8"><p class="text-sm font-extrabold text-muted">Langkah 1 dari 3</p><h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Lengkapi booking demo</h1><p class="mt-2 text-sm text-muted">Data ini hanya disimpan di browser untuk demonstrasi calon klien.</p></div>
-        <div v-if="conflict" class="mb-6 rounded-xl border border-error bg-white p-5" role="alert"><h2 class="font-black text-error">Ketersediaan berubah</h2><p class="mt-2 text-sm leading-6">Unit tidak lagi cukup untuk pilihan ini. Data kontak tetap ada; kembali ke katalog untuk memilih periode atau produk lain.</p><RouterLink class="button-outline mt-4 inline-flex" :to="{ name: 'search', query: { pickup: selection.period.pickupAt, return: selection.period.returnAt } }">Kembali ke katalog</RouterLink></div>
+        <div v-if="Object.keys(errors).length" ref="errorSummary" class="mb-6 rounded-xl border border-error bg-white p-5" role="alert" tabindex="-1"><h2 class="font-black text-error">Periksa kembali formulir</h2><ul class="mt-2 list-disc pl-5 text-sm"><li v-for="(message, field) in errors" :key="field">{{ message }}</li></ul></div>
         <form class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_23rem]" @submit.prevent="submit">
           <div class="grid gap-6">
             <section class="rounded-2xl border border-sand bg-white p-5 sm:p-7"><h2 class="text-xl font-black">Informasi penyewa</h2><div class="mt-5 grid gap-4 sm:grid-cols-2">

@@ -4,6 +4,7 @@ import { checkoutContactSchema, createBooking, getBooking, getCheckoutDraft, lis
 import { getDemoStateService } from '@/services/mockServices'
 import type { CheckoutSelection } from '@/domain/models'
 import { DEFAULT_PERIOD } from '@/utils/searchQuery'
+import { activateScenario } from '@/services/scenario'
 
 const selection: CheckoutSelection = {
   kind: 'package', itemId: 'pkg-camera-creator', quantity: 1, addOnIds: [], period: DEFAULT_PERIOD,
@@ -23,6 +24,7 @@ describe('customer booking happy path', () => {
       ...selection,
       customer: { name: 'Raka Demo', whatsapp: '+628110000001', email: 'raka@example.test' },
       termsAccepted: true,
+      submissionToken: 'submission-happy',
     })
     expect(result.ok).toBe(true)
     if (!result.ok) return
@@ -33,6 +35,10 @@ describe('customer booking happy path', () => {
     expect(getDemoStateService().hydrate().status).toBe('restored')
     expect(getBooking(result.booking.id)).toBeDefined()
 
+    const duplicate = createBooking({ ...selection, customer: { name: 'Raka Demo', whatsapp: '+628110000001' }, termsAccepted: true, submissionToken: 'submission-happy' })
+    expect(duplicate.ok && duplicate.booking.id).toBe(result.booking.id)
+    expect(listDemoCustomerBookings().filter(booking => booking.id === result.booking.id)).toHaveLength(1)
+
     const paid = submitDemoPayment(result.booking.id, 'deposit_paid')
     expect(paid).toMatchObject({ status: 'confirmed', paymentStatus: 'deposit_paid' })
     expect(paid?.pricing.depositPaid).toBe(paid?.pricing.depositDue)
@@ -42,11 +48,32 @@ describe('customer booking happy path', () => {
     const result = createBooking({
       kind: 'product', itemId: 'prod-phone-15pro', quantity: 1, addOnIds: [], period: DEFAULT_PERIOD,
       customer: { name: 'Raka Demo', whatsapp: '+628110000001' }, termsAccepted: true,
+      submissionToken: 'submission-unavailable',
     })
     expect(result).toEqual({ ok: false, reason: 'unavailable' })
   })
 
   it('rejects invalid contact details and missing consent', () => {
     expect(checkoutContactSchema.safeParse({ name: '', whatsapp: '0812', email: 'bad', termsAccepted: false }).success).toBe(false)
+  })
+
+  it('replays the final conflict scenario without mutating bookings', () => {
+    activateScenario('final-check-conflict')
+    const before = getDemoStateService().snapshot().bookings.length
+    const result = createBooking({ ...selection, customer: { name: 'Raka Demo', whatsapp: '+628110000001' }, termsAccepted: true, submissionToken: 'submission-conflict' })
+    expect(result).toEqual({ ok: false, reason: 'unavailable' })
+    expect(getDemoStateService().snapshot().bookings).toHaveLength(before)
+  })
+
+  it('supports payment failure retry and expiry with allocation release', () => {
+    const failed = submitDemoPayment('booking-003', 'failed')
+    expect(failed?.paymentStatus).toBe('failed')
+    const retried = submitDemoPayment('booking-003', 'deposit_paid')
+    expect(retried).toMatchObject({ paymentStatus: 'deposit_paid', status: 'confirmed' })
+
+    getDemoStateService().reset()
+    const expired = submitDemoPayment('booking-003', 'expired')
+    expect(expired).toMatchObject({ paymentStatus: 'expired', status: 'expired' })
+    expect(expired?.allocations.every(allocation => allocation.releasedAt)).toBe(true)
   })
 })

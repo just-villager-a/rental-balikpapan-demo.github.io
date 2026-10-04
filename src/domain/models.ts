@@ -164,6 +164,7 @@ export interface Booking {
   customerSnapshot: CustomerContact
   timeline: BookingEvent[]
   note?: string
+  submissionToken?: string
 }
 
 export interface AvailabilityBlock {
@@ -279,6 +280,7 @@ export interface CreateBookingInput extends CheckoutSelection {
   customer: CustomerContact
   note?: string
   termsAccepted: true
+  submissionToken: string
 }
 
 export type CreateBookingResult =

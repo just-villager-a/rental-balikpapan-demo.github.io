@@ -161,6 +161,7 @@ export const demoStateSchema = z
         customerSnapshot: customerContact,
         timeline: z.array(bookingEvent),
         note: z.string().optional(),
+        submissionToken: z.string().min(1).optional(),
       }),
     ),
     availabilityBlocks: z.array(

@@ -64,6 +64,14 @@ export function parseSearchQuery(query: QueryRecord): SearchQueryState {
   }
 }
 
+export function hasInvalidSearchPeriod(query: QueryRecord): boolean {
+  const pickup = first(query.pickup)
+  const returning = first(query.return)
+  if (!pickup && !returning) return false
+  if (!pickup || !returning) return true
+  try { return parseInstant(returning) <= parseInstant(pickup) } catch { return true }
+}
+
 export function serializeSearchQuery(state: SearchQueryState): Record<string, string> {
   const query: Record<string, string> = {
     pickup: state.period.pickupAt,

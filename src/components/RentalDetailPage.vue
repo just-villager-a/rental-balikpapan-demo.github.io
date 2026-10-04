@@ -26,7 +26,7 @@ const available = computed(() => availableCount.value > 0)
 const quote = computed(() => item.value ? quoteSelection(item.value, quantity.value, period.value, addOns.value.filter(addOn => selectedIds.value.includes(addOn.id))) : undefined)
 const checkoutTarget = computed(() => item.value ? { name: 'checkout', query: serializeCheckoutQuery({ kind: props.kind, itemId: item.value.id, quantity: quantity.value, addOnIds: selectedIds.value, period: period.value }) } : { name: 'search' })
 const policy = computed(() => demo.state?.locationAndPolicyCopy ?? getDemoStateService().snapshot().locationAndPolicyCopy)
-function mode(): PreviewMode { return route.query.preview === 'loading' ? 'loading' : route.query.preview === 'error' ? 'error' : 'normal' }
+function mode(): PreviewMode { return route.query.preview === 'loading' || demo.activeScenario?.mode === 'loading' ? 'loading' : route.query.preview === 'error' || demo.activeScenario?.mode === 'recoverable_error' ? 'error' : 'normal' }
 async function load() { loading.value = true; failed.value = false; productDetail.value = undefined; packageDetail.value = undefined; selectedIds.value = []; quantity.value = 1; try { const slug = String(route.params.slug); if (props.kind === 'product') productDetail.value = await getProductDetail(slug, period.value, mode()); else packageDetail.value = await getPackageDetail(slug, period.value, mode()) } catch { failed.value = true } finally { loading.value = false } }
 function toggleAddOn(id: string) { selectedIds.value = selectedIds.value.includes(id) ? selectedIds.value.filter(value => value !== id) : [...selectedIds.value, id] }
 watch(() => route.fullPath, load)
@@ -34,7 +34,7 @@ onMounted(() => { demo.hydrate(); load() })
 </script>
 <template>
   <CustomerLayout>
-    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div class="mx-auto max-w-7xl px-4 py-8 pb-24 sm:px-6 lg:px-8 lg:py-12">
       <StatePanel v-if="loading" state="loading" title="Memeriksa unit" message="Ketersediaan dihitung untuk periode WITA yang dipilih." />
       <StatePanel v-else-if="failed" state="error" title="Detail belum dapat dimuat" message="Kesalahan demo ini dapat dipulihkan. Pilihan tanggalmu tetap tersimpan." @retry="load" />
       <StatePanel v-else-if="!item" state="not-found" title="Produk tidak ditemukan" message="Tautan ini tidak cocok dengan katalog demo saat ini." />

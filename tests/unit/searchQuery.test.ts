@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { DEFAULT_PERIOD, parseSearchQuery, serializeSearchQuery } from '@/utils/searchQuery'
+import { DEFAULT_PERIOD, hasInvalidSearchPeriod, parseSearchQuery, serializeSearchQuery } from '@/utils/searchQuery'
 
 describe('catalog query state', () => {
   it('round-trips the rental period and filters through the URL', () => {
@@ -12,5 +12,6 @@ describe('catalog query state', () => {
 
   it('falls back to the deterministic WITA period for malformed input', () => {
     expect(parseSearchQuery({ pickup: 'bad', return: 'worse' }).period).toEqual(DEFAULT_PERIOD)
+    expect(hasInvalidSearchPeriod({ pickup: 'bad', return: 'worse' })).toBe(true)
   })
 })

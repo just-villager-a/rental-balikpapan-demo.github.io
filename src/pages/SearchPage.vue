@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PhFunnel, PhSlidersHorizontal, PhX } from '@phosphor-icons/vue'
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { CatalogFilters, CatalogItemView, RentalPeriod } from '@/domain/models'
 import CustomerLayout from '@/layouts/CustomerLayout.vue'
@@ -11,14 +11,15 @@ import { filterOptions, searchCatalog, type PreviewMode } from '@/services/catal
 import { getDemoStateService } from '@/services/mockServices'
 import { useDemoStore } from '@/stores/demo'
 import { formatWita } from '@/utils/datetime'
-import { parseSearchQuery, serializeSearchQuery } from '@/utils/searchQuery'
+import { hasInvalidSearchPeriod, parseSearchQuery, serializeSearchQuery } from '@/utils/searchQuery'
 
 const route = useRoute(); const router = useRouter(); const demo = useDemoStore()
 const items = ref<CatalogItemView[]>([]); const loading = ref(true); const failed = ref(false); const filterOpen = ref(false)
 const state = reactive(parseSearchQuery(route.query)); const filters = reactive<CatalogFilters>({ ...state.filters, categories: [...state.filters.categories], brands: [...state.filters.brands] })
 const options = ref({ brands: [] as string[], categories: [] as string[] })
+const invalidPeriod = computed(() => hasInvalidSearchPeriod(route.query))
 const activeCount = computed(() => filters.categories.length + filters.brands.length + Number(filters.availableOnly) + Number(filters.minDailyRate !== undefined) + Number(filters.maxDailyRate !== undefined))
-function previewMode(): PreviewMode { return route.query.preview === 'loading' ? 'loading' : route.query.preview === 'error' ? 'error' : 'normal' }
+function previewMode(): PreviewMode { return route.query.preview === 'loading' || demo.activeScenario?.mode === 'loading' ? 'loading' : route.query.preview === 'error' || demo.activeScenario?.mode === 'recoverable_error' ? 'error' : 'normal' }
 async function load() { loading.value = true; failed.value = false; try { items.value = await searchCatalog({ period: state.period, filters }, previewMode()) } catch { failed.value = true } finally { loading.value = false } }
 function syncFromRoute() { const parsed = parseSearchQuery(route.query); Object.assign(state.period, parsed.period); Object.assign(filters, parsed.filters); filters.categories = [...parsed.filters.categories]; filters.brands = [...parsed.filters.brands]; load() }
 function apply() { router.replace({ name: 'search', query: serializeSearchQuery({ period: state.period, filters }) }); filterOpen.value = false }
@@ -26,12 +27,20 @@ function changePeriod(period: RentalPeriod, category: string) { Object.assign(st
 function toggle(list: string[], value: string) { const index = list.indexOf(value); index >= 0 ? list.splice(index, 1) : list.push(value) }
 function clear() { Object.assign(filters, { categories: [], brands: [], minDailyRate: undefined, maxDailyRate: undefined, availableOnly: false, sort: 'recommended' }); apply() }
 watch(() => route.fullPath, syncFromRoute)
-onMounted(() => { demo.hydrate(); options.value = filterOptions(getDemoStateService().snapshot()); syncFromRoute() })
+watch(filterOpen, async open => {
+  await nextTick()
+  if (open) document.querySelector<HTMLElement>('[aria-label="Tutup filter"]')?.focus()
+  else [...document.querySelectorAll<HTMLButtonElement>('button')].find(button => button.textContent?.includes('Filter'))?.focus()
+})
+function handleEscape(event: KeyboardEvent) { if (event.key === 'Escape' && filterOpen.value) filterOpen.value = false }
+onMounted(() => { demo.hydrate(); options.value = filterOptions(getDemoStateService().snapshot()); syncFromRoute(); window.addEventListener('keydown', handleEscape) })
+onUnmounted(() => window.removeEventListener('keydown', handleEscape))
 </script>
 <template>
   <CustomerLayout>
     <section class="hidden border-b border-sand bg-white md:block"><div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"><p class="text-sm font-extrabold uppercase tracking-widest text-muted">Katalog</p><h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Temukan perangkat untuk jadwalmu</h1><div class="mt-6"><RentalSearchForm compact :period="state.period" :initial-category="filters.categories[0]" @submit="changePeriod" /></div></div></section>
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div v-if="invalidPeriod || route.query.notice === 'invalid_checkout'" class="mb-5 rounded-xl border border-warning bg-white p-4 text-sm" role="status"><strong>{{ invalidPeriod ? 'Periode pada tautan tidak valid.' : 'Pilih produk sebelum membuka checkout.' }}</strong><span class="mt-1 block text-muted">{{ invalidPeriod ? 'Tanggal demo standar digunakan agar halaman tetap dapat dibuka.' : 'Pilihan checkout sebelumnya tidak lengkap atau tidak lagi tersedia.' }}</span></div>
       <h1 class="mb-5 text-2xl font-black md:hidden">Hasil Ketersediaan</h1><div class="mb-6 flex flex-wrap items-end justify-between gap-4"><div><p class="text-sm font-bold text-muted">{{ formatWita(state.period.pickupAt) }} sampai</p><p class="mt-1 text-sm font-bold">{{ formatWita(state.period.returnAt) }}</p></div><div class="flex items-center gap-2"><button class="button-outline lg:hidden" type="button" @click="filterOpen = true"><PhFunnel /> Filter <span v-if="activeCount">({{ activeCount }})</span></button><label class="field min-w-44"><span>Urutkan</span><select v-model="filters.sort" @change="apply"><option value="recommended">Direkomendasikan</option><option value="price_asc">Harga terendah</option><option value="price_desc">Harga tertinggi</option></select></label></div></div>
       <div class="grid gap-8 lg:grid-cols-[15rem_1fr]">
         <aside class="hidden lg:block"><div class="sticky top-24 rounded-2xl border border-sand bg-white p-5"><FilterFields :filters="filters" :options="options" @toggle-category="toggle(filters.categories, $event)" @toggle-brand="toggle(filters.brands, $event)" /><div class="mt-5 grid gap-2"><button class="button-dark" type="button" @click="apply">Terapkan filter</button><button class="min-h-11 text-sm font-bold text-muted" type="button" @click="clear">Reset</button></div></div></aside>

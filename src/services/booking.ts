@@ -21,6 +21,18 @@ export interface CheckoutDraftView {
   quote: Booking['pricing']
 }
 
+export interface PreservedCheckout {
+  selection: CheckoutSelection
+  customer: { name: string; whatsapp: string; email?: string }
+  note?: string
+}
+
+let preservedCheckout: PreservedCheckout | undefined
+
+export function preserveCheckout(value: PreservedCheckout): void { preservedCheckout = structuredClone(value) }
+export function getPreservedCheckout(): PreservedCheckout | undefined { return preservedCheckout ? structuredClone(preservedCheckout) : undefined }
+export function clearPreservedCheckout(): void { preservedCheckout = undefined }
+
 function scenarioNow(): string {
   const state = getDemoStateService().snapshot()
   return state.demoScenarios.find((scenario) => scenario.id === state.activeScenarioId)?.asOf ?? '2026-10-04T10:00:00+08:00'
@@ -47,6 +59,8 @@ export function createBooking(input: CreateBookingInput): CreateBookingResult {
   if (!parsed.success) return { ok: false, reason: 'invalid_selection' }
   const repository = getDemoStateService()
   const state = repository.snapshot()
+  const existing = state.bookings.find(booking => booking.submissionToken === input.submissionToken)
+  if (existing) return { ok: true, booking: existing }
   const draft = getCheckoutDraft(input)
   if (!draft) return { ok: false, reason: 'invalid_selection' }
   const bookingId = `booking-${String(state.bookingSequence).padStart(3, '0')}`
@@ -58,7 +72,8 @@ export function createBooking(input: CreateBookingInput): CreateBookingResult {
   }, ...draft.addOns.map((addOn, index) => ({ id: `line-${bookingId}-${index + 2}`, kind: 'addon' as const, itemId: addOn.id, nameSnapshot: addOn.name, quantity: 1, priceUnit: addOn.priceUnit, unitPriceSnapshot: addOn.price }))]
   const selectionLines = lines.map(line => ({ id: line.id, kind: line.kind, itemId: line.itemId, quantity: line.quantity }))
   const allocation = allocateRequirements({ requirements: expandAllocationRequirements(selectionLines, state.packages, state.addOns), period: input.period, units: state.inventoryUnits, bookings: state.bookings, availabilityBlocks: state.availabilityBlocks, asOf: scenarioNow() })
-  if (!allocation.available) return { ok: false, reason: 'unavailable' }
+  const activeScenario = state.demoScenarios.find(scenario => scenario.id === state.activeScenarioId)
+  if (!allocation.available || activeScenario?.mode === 'final_conflict') return { ok: false, reason: 'unavailable' }
 
   const now = scenarioNow()
   const sequence = state.bookingSequence
@@ -73,6 +88,7 @@ export function createBooking(input: CreateBookingInput): CreateBookingResult {
     customerSnapshot: { name: parsed.data.name, whatsapp: parsed.data.whatsapp, email: parsed.data.email || undefined },
     timeline: [{ id: `event-${bookingId}-1`, at: now, actor: 'demo_customer', label: 'Booking demo dibuat' }],
     note: parsed.data.note || undefined,
+    submissionToken: input.submissionToken,
   }
   repository.update(next => { next.bookings.push(booking); next.bookingSequence += 1 })
   return { ok: true, booking }
@@ -93,11 +109,21 @@ export function listBookingCalendarEvents(): { id: string; title: string; start:
   }))
 }
 
-export function submitDemoPayment(id: string, outcome: 'pending' | 'deposit_paid'): Booking | undefined {
+export function submitDemoPayment(id: string, outcome: 'pending' | 'deposit_paid' | 'failed' | 'expired'): Booking | undefined {
   const repository = getDemoStateService(); const now = scenarioNow(); let result: Booking | undefined
   repository.update(state => {
     const index = state.bookings.findIndex(booking => booking.id === id); if (index < 0) return
-    const source = state.bookings[index]!; if (source.status !== 'waiting_payment' || !['unpaid', 'pending_verification'].includes(source.paymentStatus)) return
+    const source = state.bookings[index]!; if (source.status !== 'waiting_payment' || !['unpaid', 'pending_verification', 'failed'].includes(source.paymentStatus)) return
+    if (outcome === 'expired') {
+      result = { ...source, updatedAt: now, status: 'expired', paymentStatus: 'expired', allocations: source.allocations.map(value => ({ ...value, releasedAt: now })), timeline: [...source.timeline, { id: `event-${id}-${source.timeline.length + 1}`, at: now, actor: 'system', label: 'Masa pembayaran demo berakhir' }] }
+      state.bookings[index] = result
+      return
+    }
+    if (outcome === 'failed') {
+      result = { ...source, updatedAt: now, paymentStatus: 'failed', timeline: [...source.timeline, { id: `event-${id}-${source.timeline.length + 1}`, at: now, actor: 'system', label: 'Pembayaran demo gagal' }] }
+      state.bookings[index] = result
+      return
+    }
     const paid = outcome === 'deposit_paid'
     result = { ...source, updatedAt: now, status: paid ? 'confirmed' : source.status, paymentStatus: paid ? 'deposit_paid' : 'pending_verification', pricing: { ...source.pricing, depositPaid: paid ? source.pricing.depositDue : 0, remainingBalance: paid ? source.pricing.rentalSubtotal - source.pricing.depositDue : source.pricing.remainingBalance }, timeline: [...source.timeline, { id: `event-${id}-${source.timeline.length + 1}`, at: now, actor: 'system', label: paid ? 'DP demo berhasil' : 'Pembayaran demo menunggu verifikasi' }] }
     state.bookings[index] = result

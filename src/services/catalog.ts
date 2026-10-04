@@ -31,6 +31,10 @@ export interface PackageDetailView {
 
 const failedPreviews = new Set<string>()
 
+export function resetCatalogPreviewFailures(): void {
+  failedPreviews.clear()
+}
+
 async function simulate(mode: PreviewMode, key: string): Promise<void> {
   if (mode === 'loading') await new Promise((resolve) => setTimeout(resolve, 650))
   if (mode === 'error' && !failedPreviews.has(key)) {
