@@ -5,7 +5,7 @@ const props = defineProps<{ src?: string; alt: string; category?: string; eager?
 const failed = ref(false)
 </script>
 <template>
-  <img v-if="props.src && !failed" :src="props.src" :alt="alt" class="h-full w-full object-cover" :loading="eager ? 'eager' : 'lazy'" @error="failed = true" />
+  <img v-if="props.src && !failed" :src="props.src" :alt="alt" class="h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.03]" :class="category === 'iphone' ? 'object-contain' : 'object-cover'" :loading="eager ? 'eager' : 'lazy'" @error="failed = true" />
   <div v-else class="media-placeholder" role="img" :aria-label="`Gambar ${alt} belum tersedia`" data-testid="missing-image">
     <PhDeviceMobile v-if="category === 'iphone'" :size="52" weight="thin" />
     <PhPackage v-else-if="category === 'package'" :size="52" weight="thin" />

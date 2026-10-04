@@ -7,7 +7,7 @@ const menuOpen = ref(false)
 </script>
 
 <template>
-  <div class="min-h-screen bg-canvas text-ink">
+  <div class="min-h-screen w-full max-w-full overflow-x-hidden bg-canvas text-ink">
     <header class="sticky top-0 z-40 border-b border-sand bg-white/95 backdrop-blur">
       <div class="mx-auto flex h-18 max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
         <RouterLink to="/" class="flex items-center gap-2 font-extrabold tracking-tight" aria-label="Sewa Balikpapan, beranda">
@@ -35,7 +35,7 @@ const menuOpen = ref(false)
         <RouterLink class="mobile-nav-link" to="/my-bookings" @click="menuOpen = false">Riwayat Booking</RouterLink>
       </nav>
     </header>
-    <main><slot /></main>
+    <main class="min-w-0"><slot /></main>
     <footer class="border-t border-sand bg-ink text-white">
       <div class="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3 lg:px-8">
         <div><p class="font-extrabold">Sewa Balikpapan</p><p class="mt-2 max-w-sm text-sm leading-6 text-white/65">Prototype katalog rental kamera dan iPhone di Balikpapan.</p></div>

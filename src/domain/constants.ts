@@ -1,4 +1,4 @@
-export const DEMO_SCHEMA_VERSION = 1
+export const DEMO_SCHEMA_VERSION = 2
 export const STORAGE_PREFIX = 'sewa-balikpapan:demo:'
 export const STORAGE_KEY = `${STORAGE_PREFIX}v${DEMO_SCHEMA_VERSION}:state`
 export const WITA_TIMEZONE = 'Asia/Makassar' as const

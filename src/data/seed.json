@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "activeScenarioId": "happy-camera-package",
   "bookingSequence": 11,
   "products": [
@@ -14,7 +14,7 @@
       "summary": "Kamera full-frame dengan lensa kit untuk kebutuhan foto dan video.",
       "specifications": { "sensor": "24.2 MP Full Frame", "video": "4K" },
       "includedItems": ["Body kamera", "Lensa 28–70mm", "2 baterai", "Charger", "Tas"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/camera.png"],
       "isFeatured": true
     },
     {
@@ -28,7 +28,7 @@
       "summary": "Body kamera full-frame untuk produksi foto dan video.",
       "specifications": { "sensor": "33 MP Full Frame", "video": "4K 60p" },
       "includedItems": ["Body kamera", "Baterai", "Charger"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/camera.png"],
       "isFeatured": true
     },
     {
@@ -42,7 +42,7 @@
       "summary": "Body kamera mirrorless dengan stabilisasi internal.",
       "specifications": { "sensor": "20.1 MP Full Frame", "stabilization": "IBIS" },
       "includedItems": ["Body kamera", "2 baterai", "Charger"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/camera.png"],
       "isFeatured": true
     },
     {
@@ -56,7 +56,7 @@
       "summary": "Kamera APS-C dengan simulasi film.",
       "specifications": { "sensor": "26.1 MP APS-C", "stabilization": "IBIS" },
       "includedItems": ["Body kamera", "2 baterai", "Charger"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/camera.png"],
       "isFeatured": false
     },
     {
@@ -70,7 +70,7 @@
       "summary": "Lensa zoom standar untuk mount Sony E.",
       "specifications": { "mount": "Sony E", "filter": "82 mm" },
       "includedItems": ["Lensa", "Tutup depan dan belakang", "Lens hood"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/lens.png"],
       "isFeatured": true
     },
     {
@@ -84,7 +84,7 @@
       "summary": "Lensa prime ringan untuk portrait.",
       "specifications": { "mount": "Sony E", "aperture": "f/1.8" },
       "includedItems": ["Lensa", "Tutup depan dan belakang"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/lens.png"],
       "isFeatured": false
     },
     {
@@ -98,7 +98,7 @@
       "summary": "iPhone untuk kebutuhan produksi konten demo.",
       "specifications": { "storage": "256 GB", "connector": "USB-C" },
       "includedItems": ["iPhone", "Kabel", "Adaptor"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/iphone.png"],
       "isFeatured": true
     },
     {
@@ -112,7 +112,7 @@
       "summary": "iPhone Pro untuk kebutuhan acara dan konten.",
       "specifications": { "storage": "256 GB", "connector": "Lightning" },
       "includedItems": ["iPhone", "Kabel", "Adaptor"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/iphone.png"],
       "isFeatured": true
     },
     {
@@ -126,7 +126,7 @@
       "summary": "iPhone untuk penggunaan harian dan dokumentasi.",
       "specifications": { "storage": "128 GB", "connector": "Lightning" },
       "includedItems": ["iPhone", "Kabel", "Adaptor"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/iphone.png"],
       "isFeatured": false
     },
     {
@@ -140,7 +140,7 @@
       "summary": "Tripod stock-tracked untuk kamera atau ponsel.",
       "specifications": {},
       "includedItems": ["Tripod", "Quick-release plate"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/accessories.png"],
       "isFeatured": false
     },
     {
@@ -154,7 +154,7 @@
       "summary": "Mikrofon nirkabel stock-tracked.",
       "specifications": {},
       "includedItems": ["Transmitter", "Receiver", "Kabel"],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/accessories.png"],
       "isFeatured": false
     },
     {
@@ -168,7 +168,7 @@
       "summary": "Add-on demo yang tidak menggunakan stok fisik terpisah.",
       "specifications": {},
       "includedItems": [],
-      "imagePaths": [],
+      "imagePaths": ["/catalog/accessories.png"],
       "isFeatured": false
     }
   ],
@@ -209,7 +209,7 @@
         { "productId": "prod-lens-sony-2470", "quantity": 1, "variantTags": ["sony-e"] },
         { "productId": "prod-acc-mic", "quantity": 1 }
       ],
-      "imagePaths": []
+      "imagePaths": ["/catalog/creator-kit.png"]
     },
     {
       "id": "pkg-iphone-content",
@@ -222,7 +222,7 @@
         { "productId": "prod-acc-tripod", "quantity": 1 },
         { "productId": "prod-acc-mic", "quantity": 1 }
       ],
-      "imagePaths": []
+      "imagePaths": ["/catalog/creator-kit.png"]
     }
   ],
   "addOns": [

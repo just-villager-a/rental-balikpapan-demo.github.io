@@ -15,8 +15,8 @@ function submit() {
 }
 </script>
 <template>
-  <form class="rounded-2xl border border-sand bg-white p-4" :class="compact ? '' : 'sm:p-5'" @submit.prevent="submit">
-    <div class="grid gap-3" :class="compact ? 'md:grid-cols-[1fr_1fr_.8fr_auto]' : 'md:grid-cols-[1fr_1fr_.8fr_auto]'">
+  <form class="min-w-0 rounded-2xl border border-sand bg-white p-4" :class="compact ? '' : 'sm:p-5'" @submit.prevent="submit">
+    <div class="grid min-w-0 gap-3" :class="compact ? 'md:grid-cols-[1fr_1fr_.8fr_auto]' : 'md:grid-cols-[1fr_1fr_.8fr_auto]'">
       <label class="field"><span>Mulai sewa</span><span class="field-icon-wrap"><PhCalendarBlank :size="18" /><input v-model="pickup" type="datetime-local" required /></span></label>
       <label class="field"><span>Selesai sewa</span><span class="field-icon-wrap"><PhCalendarBlank :size="18" /><input v-model="returnAt" type="datetime-local" required /></span></label>
       <label class="field"><span>Kategori</span><select v-model="category"><option value="">Semua kategori</option><option value="camera">Kamera</option><option value="lens">Lensa</option><option value="iphone">iPhone</option><option value="package">Paket</option></select></label>
