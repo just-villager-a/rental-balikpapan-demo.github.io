@@ -26,7 +26,12 @@ describe('catalog UI states', () => {
   })
 
   it('updates the quote when quantity and add-ons change', async () => {
-    const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/products/:slug', component: { template: '<div />' } }] })
+    const stub = { template: '<div />' }
+    const router = createRouter({ history: createMemoryHistory(), routes: [
+      { path: '/', component: stub }, { path: '/search', component: stub },
+      { path: '/my-bookings', component: stub }, { path: '/products/:slug', component: stub },
+      { path: '/checkout', name: 'checkout', component: stub },
+    ] })
     await router.push('/products/sony-alpha-a7-iii-kit-28-70mm?pickup=2026-10-10T09:00:00%2B08:00&return=2026-10-12T09:00:00%2B08:00'); await router.isReady()
     const wrapper = mount(RentalDetailPage, { props: { kind: 'product' }, global: { plugins: [createPinia(), router] } })
     await flushPromises()

@@ -18,7 +18,7 @@ const menuOpen = ref(false)
           <RouterLink class="nav-link" to="/search?category=camera">Kamera</RouterLink>
           <RouterLink class="nav-link" to="/search?category=iphone">iPhone</RouterLink>
           <RouterLink class="nav-link" to="/search">Semua Produk</RouterLink>
-          <span class="cursor-not-allowed text-muted" title="Tersedia pada milestone berikutnya">Riwayat</span>
+          <RouterLink class="nav-link" to="/my-bookings">Riwayat</RouterLink>
         </nav>
         <button class="button-outline hidden lg:inline-flex" type="button" title="Pengiriman pesan belum diaktifkan">
           <PhChatText :size="19" /> Tanya Admin
@@ -32,6 +32,7 @@ const menuOpen = ref(false)
         <RouterLink class="mobile-nav-link" to="/search?category=camera" @click="menuOpen = false">Kamera</RouterLink>
         <RouterLink class="mobile-nav-link" to="/search?category=iphone" @click="menuOpen = false">iPhone</RouterLink>
         <RouterLink class="mobile-nav-link" to="/search" @click="menuOpen = false">Semua Produk</RouterLink>
+        <RouterLink class="mobile-nav-link" to="/my-bookings" @click="menuOpen = false">Riwayat Booking</RouterLink>
       </nav>
     </header>
     <main><slot /></main>

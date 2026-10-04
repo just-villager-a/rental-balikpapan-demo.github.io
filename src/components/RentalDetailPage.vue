@@ -13,6 +13,7 @@ import { useDemoStore } from '@/stores/demo'
 import { formatIdr } from '@/utils/currency'
 import { formatWita } from '@/utils/datetime'
 import { parseSearchQuery } from '@/utils/searchQuery'
+import { serializeCheckoutQuery } from '@/utils/checkoutQuery'
 
 const props = defineProps<{ kind: 'product' | 'package' }>()
 const route = useRoute(); const demo = useDemoStore(); const period = computed(() => parseSearchQuery(route.query).period)
@@ -23,6 +24,7 @@ const addOns = computed<AddOn[]>(() => productDetail.value?.addOns ?? packageDet
 const availableCount = computed(() => productDetail.value?.availableCount ?? (packageDetail.value?.available ? 1 : 0))
 const available = computed(() => availableCount.value > 0)
 const quote = computed(() => item.value ? quoteSelection(item.value, quantity.value, period.value, addOns.value.filter(addOn => selectedIds.value.includes(addOn.id))) : undefined)
+const checkoutTarget = computed(() => item.value ? { name: 'checkout', query: serializeCheckoutQuery({ kind: props.kind, itemId: item.value.id, quantity: quantity.value, addOnIds: selectedIds.value, period: period.value }) } : { name: 'search' })
 const policy = computed(() => demo.state?.locationAndPolicyCopy ?? getDemoStateService().snapshot().locationAndPolicyCopy)
 function mode(): PreviewMode { return route.query.preview === 'loading' ? 'loading' : route.query.preview === 'error' ? 'error' : 'normal' }
 async function load() { loading.value = true; failed.value = false; productDetail.value = undefined; packageDetail.value = undefined; selectedIds.value = []; quantity.value = 1; try { const slug = String(route.params.slug); if (props.kind === 'product') productDetail.value = await getProductDetail(slug, period.value, mode()); else packageDetail.value = await getPackageDetail(slug, period.value, mode()) } catch { failed.value = true } finally { loading.value = false } }
@@ -60,10 +62,10 @@ onMounted(() => { demo.hydrate(); load() })
           <label class="mt-5 block text-xs font-extrabold">Jumlah unit</label><div class="mt-2 flex items-center justify-between rounded-lg border border-sand"><button class="grid size-11 place-items-center" type="button" aria-label="Kurangi jumlah" :disabled="quantity === 1" @click="quantity--"><PhMinus /></button><strong data-testid="quantity">{{ quantity }}</strong><button class="grid size-11 place-items-center" type="button" aria-label="Tambah jumlah" :disabled="quantity >= availableCount" @click="quantity++"><PhPlus /></button></div>
           <fieldset v-if="addOns.length" class="mt-5"><legend class="text-xs font-extrabold">Tambahan</legend><label v-for="addOn in addOns" :key="addOn.id" class="mt-2 flex min-h-11 items-center justify-between gap-3 text-sm"><span class="flex items-center gap-2"><input type="checkbox" :checked="selectedIds.includes(addOn.id)" @change="toggleAddOn(addOn.id)" />{{ addOn.name }}</span><span class="text-xs font-bold">+{{ formatIdr(addOn.price) }}</span></label></fieldset>
           <div v-if="quote" class="mt-6 border-t border-sand pt-5"><div class="flex justify-between text-sm"><span>{{ quote.billableDays }} hari</span><strong data-testid="quote-total">{{ formatIdr(quote.rentalSubtotal) }}</strong></div><div class="mt-2 flex justify-between text-sm text-muted"><span>Deposit demo</span><span>{{ formatIdr(quote.depositDue) }}</span></div></div>
-          <button class="button-disabled mt-5 w-full" type="button" disabled>{{ available ? 'Pemesanan di Milestone 3' : 'Tidak tersedia di periode ini' }}</button><p class="mt-3 flex gap-2 text-xs leading-5 text-muted"><PhInfo class="mt-0.5 shrink-0" />Tidak ada pembayaran atau pengiriman pesan nyata pada prototype ini.</p>
+          <RouterLink v-if="available" class="button-primary mt-5 inline-flex w-full" :to="checkoutTarget">Lanjutkan Pemesanan</RouterLink><button v-else class="button-disabled mt-5 w-full" type="button" disabled>Tidak tersedia di periode ini</button><p class="mt-3 flex gap-2 text-xs leading-5 text-muted"><PhInfo class="mt-0.5 shrink-0" />Tidak ada pembayaran atau pengiriman pesan nyata pada prototype ini.</p>
         </div></aside>
       </div>
     </div>
-    <div v-if="item" class="sticky bottom-0 z-30 border-t border-sand bg-white p-3 lg:hidden"><div class="mx-auto flex max-w-2xl items-center justify-between gap-4"><div><p class="text-xs text-muted">{{ quote?.billableDays }} hari</p><strong data-testid="mobile-quote-total">{{ quote ? formatIdr(quote.rentalSubtotal) : '' }}</strong></div><button class="button-disabled" type="button" disabled>{{ available ? 'Lanjut di Milestone 3' : 'Tidak tersedia' }}</button></div></div>
+    <div v-if="item" class="sticky bottom-0 z-30 border-t border-sand bg-white p-3 lg:hidden"><div class="mx-auto flex max-w-2xl items-center justify-between gap-4"><div><p class="text-xs text-muted">{{ quote?.billableDays }} hari</p><strong data-testid="mobile-quote-total">{{ quote ? formatIdr(quote.rentalSubtotal) : '' }}</strong></div><RouterLink v-if="available" class="button-primary inline-flex" :to="checkoutTarget">Lanjutkan</RouterLink><button v-else class="button-disabled" type="button" disabled>Tidak tersedia</button></div></div>
   </CustomerLayout>
 </template>

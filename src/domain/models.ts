@@ -266,3 +266,21 @@ export interface CatalogSearchInput {
   period: RentalPeriod
   filters: CatalogFilters
 }
+
+export interface CheckoutSelection {
+  kind: 'product' | 'package'
+  itemId: EntityId
+  quantity: number
+  addOnIds: EntityId[]
+  period: RentalPeriod
+}
+
+export interface CreateBookingInput extends CheckoutSelection {
+  customer: CustomerContact
+  note?: string
+  termsAccepted: true
+}
+
+export type CreateBookingResult =
+  | { ok: true; booking: Booking }
+  | { ok: false; reason: 'unavailable' | 'invalid_selection' }
