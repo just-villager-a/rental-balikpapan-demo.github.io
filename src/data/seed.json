@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "activeScenarioId": "happy-camera-package",
+  "bookingSequence": 11,
+  "products": [
+    {
+      "id": "prod-cam-sony-a7iii",
+      "slug": "sony-alpha-a7-iii-kit-28-70mm",
+      "category": "camera",
+      "serviceCategory": "camera",
+      "name": "Sony Alpha A7 III Kit 28–70mm",
+      "brand": "Sony",
+      "dailyRate": 350000,
+      "summary": "Kamera full-frame dengan lensa kit untuk kebutuhan foto dan video.",
+      "specifications": { "sensor": "24.2 MP Full Frame", "video": "4K" },
+      "includedItems": ["Body kamera", "Lensa 28–70mm", "2 baterai", "Charger", "Tas"],
+      "imagePaths": [],
+      "isFeatured": true
+    },
+    {
+      "id": "prod-cam-sony-a7iv",
+      "slug": "sony-alpha-a7-iv-body",
+      "category": "camera",
+      "serviceCategory": "camera",
+      "name": "Sony Alpha A7 IV Body",
+      "brand": "Sony",
+      "dailyRate": 450000,
+      "summary": "Body kamera full-frame untuk produksi foto dan video.",
+      "specifications": { "sensor": "33 MP Full Frame", "video": "4K 60p" },
+      "includedItems": ["Body kamera", "Baterai", "Charger"],
+      "imagePaths": [],
+      "isFeatured": true
+    },
+    {
+      "id": "prod-cam-canon-r6",
+      "slug": "canon-eos-r6-body",
+      "category": "camera",
+      "serviceCategory": "camera",
+      "name": "Canon EOS R6 Body",
+      "brand": "Canon",
+      "dailyRate": 400000,
+      "summary": "Body kamera mirrorless dengan stabilisasi internal.",
+      "specifications": { "sensor": "20.1 MP Full Frame", "stabilization": "IBIS" },
+      "includedItems": ["Body kamera", "2 baterai", "Charger"],
+      "imagePaths": [],
+      "isFeatured": true
+    },
+    {
+      "id": "prod-cam-fuji-xt4",
+      "slug": "fujifilm-x-t4",
+      "category": "camera",
+      "serviceCategory": "camera",
+      "name": "Fujifilm X-T4",
+      "brand": "Fujifilm",
+      "dailyRate": 320000,
+      "summary": "Kamera APS-C dengan simulasi film.",
+      "specifications": { "sensor": "26.1 MP APS-C", "stabilization": "IBIS" },
+      "includedItems": ["Body kamera", "2 baterai", "Charger"],
+      "imagePaths": [],
+      "isFeatured": false
+    },
+    {
+      "id": "prod-lens-sony-2470",
+      "slug": "sony-fe-24-70mm-f28-gm-ii",
+      "category": "lens",
+      "serviceCategory": "camera",
+      "name": "Sony FE 24–70mm f/2.8 GM II",
+      "brand": "Sony",
+      "dailyRate": 250000,
+      "summary": "Lensa zoom standar untuk mount Sony E.",
+      "specifications": { "mount": "Sony E", "filter": "82 mm" },
+      "includedItems": ["Lensa", "Tutup depan dan belakang", "Lens hood"],
+      "imagePaths": [],
+      "isFeatured": true
+    },
+    {
+      "id": "prod-lens-sony-50",
+      "slug": "sony-fe-50mm-f18",
+      "category": "lens",
+      "serviceCategory": "camera",
+      "name": "Sony FE 50mm f/1.8",
+      "brand": "Sony",
+      "dailyRate": 100000,
+      "summary": "Lensa prime ringan untuk portrait.",
+      "specifications": { "mount": "Sony E", "aperture": "f/1.8" },
+      "includedItems": ["Lensa", "Tutup depan dan belakang"],
+      "imagePaths": [],
+      "isFeatured": false
+    },
+    {
+      "id": "prod-phone-15pro",
+      "slug": "iphone-15-pro-256gb",
+      "category": "iphone",
+      "serviceCategory": "iphone",
+      "name": "iPhone 15 Pro 256GB",
+      "brand": "Apple",
+      "dailyRate": 450000,
+      "summary": "iPhone untuk kebutuhan produksi konten demo.",
+      "specifications": { "storage": "256 GB", "connector": "USB-C" },
+      "includedItems": ["iPhone", "Kabel", "Adaptor"],
+      "imagePaths": [],
+      "isFeatured": true
+    },
+    {
+      "id": "prod-phone-14pro",
+      "slug": "iphone-14-pro-256gb",
+      "category": "iphone",
+      "serviceCategory": "iphone",
+      "name": "iPhone 14 Pro 256GB",
+      "brand": "Apple",
+      "dailyRate": 380000,
+      "summary": "iPhone Pro untuk kebutuhan acara dan konten.",
+      "specifications": { "storage": "256 GB", "connector": "Lightning" },
+      "includedItems": ["iPhone", "Kabel", "Adaptor"],
+      "imagePaths": [],
+      "isFeatured": true
+    },
+    {
+      "id": "prod-phone-13",
+      "slug": "iphone-13-128gb",
+      "category": "iphone",
+      "serviceCategory": "iphone",
+      "name": "iPhone 13 128GB",
+      "brand": "Apple",
+      "dailyRate": 280000,
+      "summary": "iPhone untuk penggunaan harian dan dokumentasi.",
+      "specifications": { "storage": "128 GB", "connector": "Lightning" },
+      "includedItems": ["iPhone", "Kabel", "Adaptor"],
+      "imagePaths": [],
+      "isFeatured": false
+    },
+    {
+      "id": "prod-acc-tripod",
+      "slug": "tripod-takara",
+      "category": "accessory",
+      "serviceCategory": "camera",
+      "name": "Tripod Takara",
+      "brand": "Takara",
+      "dailyRate": 40000,
+      "summary": "Tripod stock-tracked untuk kamera atau ponsel.",
+      "specifications": {},
+      "includedItems": ["Tripod", "Quick-release plate"],
+      "imagePaths": [],
+      "isFeatured": false
+    },
+    {
+      "id": "prod-acc-mic",
+      "slug": "wireless-microphone",
+      "category": "accessory",
+      "serviceCategory": "camera",
+      "name": "Wireless Microphone",
+      "brand": "Demo Audio",
+      "dailyRate": 75000,
+      "summary": "Mikrofon nirkabel stock-tracked.",
+      "specifications": {},
+      "includedItems": ["Transmitter", "Receiver", "Kabel"],
+      "imagePaths": [],
+      "isFeatured": false
+    },
+    {
+      "id": "prod-acc-battery-service",
+      "slug": "extra-battery-service",
+      "category": "accessory",
+      "serviceCategory": "camera",
+      "name": "Layanan Baterai Tambahan",
+      "brand": "Demo Service",
+      "dailyRate": 35000,
+      "summary": "Add-on demo yang tidak menggunakan stok fisik terpisah.",
+      "specifications": {},
+      "includedItems": [],
+      "imagePaths": [],
+      "isFeatured": false
+    }
+  ],
+  "inventoryUnits": [
+    { "id": "CAM-A7III-001", "productId": "prod-cam-sony-a7iii", "assetLabel": "CAM-A7III-001", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "CAM-A7III-002", "productId": "prod-cam-sony-a7iii", "assetLabel": "CAM-A7III-002", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "CAM-A7III-003", "productId": "prod-cam-sony-a7iii", "assetLabel": "CAM-A7III-003", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "CAM-A7IV-001", "productId": "prod-cam-sony-a7iv", "assetLabel": "CAM-A7IV-001", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "CAM-A7IV-002", "productId": "prod-cam-sony-a7iv", "assetLabel": "CAM-A7IV-002", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "CAM-A7IV-003", "productId": "prod-cam-sony-a7iv", "assetLabel": "CAM-A7IV-003", "lifecycle": "inactive", "variantTags": ["sony-e"] },
+    { "id": "CAM-R6-001", "productId": "prod-cam-canon-r6", "assetLabel": "CAM-R6-001", "lifecycle": "active", "variantTags": ["canon-rf"] },
+    { "id": "CAM-R6-002", "productId": "prod-cam-canon-r6", "assetLabel": "CAM-R6-002", "lifecycle": "active", "variantTags": ["canon-rf"] },
+    { "id": "CAM-XT4-001", "productId": "prod-cam-fuji-xt4", "assetLabel": "CAM-XT4-001", "lifecycle": "active", "variantTags": ["fuji-x"] },
+    { "id": "LENS-2470-001", "productId": "prod-lens-sony-2470", "assetLabel": "LENS-2470-001", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "LENS-2470-002", "productId": "prod-lens-sony-2470", "assetLabel": "LENS-2470-002", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "LENS-50-001", "productId": "prod-lens-sony-50", "assetLabel": "LENS-50-001", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "LENS-50-002", "productId": "prod-lens-sony-50", "assetLabel": "LENS-50-002", "lifecycle": "active", "variantTags": ["sony-e"] },
+    { "id": "IPH-15P-001", "productId": "prod-phone-15pro", "assetLabel": "IPH-15P-001", "lifecycle": "active", "variantTags": ["256gb"] },
+    { "id": "IPH-15P-002", "productId": "prod-phone-15pro", "assetLabel": "IPH-15P-002", "lifecycle": "active", "variantTags": ["256gb"] },
+    { "id": "IPH-14P-001", "productId": "prod-phone-14pro", "assetLabel": "IPH-14P-001", "lifecycle": "active", "variantTags": ["256gb"] },
+    { "id": "IPH-14P-002", "productId": "prod-phone-14pro", "assetLabel": "IPH-14P-002", "lifecycle": "active", "variantTags": ["256gb"] },
+    { "id": "IPH-13-001", "productId": "prod-phone-13", "assetLabel": "IPH-13-001", "lifecycle": "active", "variantTags": ["128gb"] },
+    { "id": "IPH-13-002", "productId": "prod-phone-13", "assetLabel": "IPH-13-002", "lifecycle": "active", "variantTags": ["128gb"] },
+    { "id": "ACC-TRIPOD-001", "productId": "prod-acc-tripod", "assetLabel": "ACC-TRIPOD-001", "lifecycle": "active", "variantTags": [] },
+    { "id": "ACC-TRIPOD-002", "productId": "prod-acc-tripod", "assetLabel": "ACC-TRIPOD-002", "lifecycle": "active", "variantTags": [] },
+    { "id": "ACC-MIC-001", "productId": "prod-acc-mic", "assetLabel": "ACC-MIC-001", "lifecycle": "active", "variantTags": [] },
+    { "id": "ACC-MIC-002", "productId": "prod-acc-mic", "assetLabel": "ACC-MIC-002", "lifecycle": "active", "variantTags": [] }
+  ],
+  "packages": [
+    {
+      "id": "pkg-camera-creator",
+      "slug": "creator-camera-kit",
+      "name": "Creator Camera Kit",
+      "serviceCategory": "camera",
+      "dailyRate": 575000,
+      "components": [
+        { "productId": "prod-cam-sony-a7iii", "quantity": 1, "variantTags": ["sony-e"] },
+        { "productId": "prod-lens-sony-2470", "quantity": 1, "variantTags": ["sony-e"] },
+        { "productId": "prod-acc-mic", "quantity": 1 }
+      ],
+      "imagePaths": []
+    },
+    {
+      "id": "pkg-iphone-content",
+      "slug": "iphone-content-kit",
+      "name": "iPhone Content Kit",
+      "serviceCategory": "iphone",
+      "dailyRate": 525000,
+      "components": [
+        { "productId": "prod-phone-15pro", "quantity": 1, "variantTags": ["256gb"] },
+        { "productId": "prod-acc-tripod", "quantity": 1 },
+        { "productId": "prod-acc-mic", "quantity": 1 }
+      ],
+      "imagePaths": []
+    }
+  ],
+  "addOns": [
+    { "id": "addon-tripod", "productId": "prod-acc-tripod", "name": "Tripod Takara", "price": 40000, "priceUnit": "per_day", "stockTracked": true, "applicableTo": ["prod-cam-sony-a7iii", "prod-cam-sony-a7iv", "prod-cam-canon-r6", "prod-cam-fuji-xt4", "prod-phone-15pro", "prod-phone-14pro", "prod-phone-13"] },
+    { "id": "addon-mic", "productId": "prod-acc-mic", "name": "Wireless Microphone", "price": 75000, "priceUnit": "per_day", "stockTracked": true, "applicableTo": ["prod-cam-sony-a7iii", "prod-cam-sony-a7iv", "prod-phone-15pro", "prod-phone-14pro"] },
+    { "id": "addon-extra-battery", "name": "Layanan Baterai Tambahan", "price": 35000, "priceUnit": "per_day", "stockTracked": false, "applicableTo": ["prod-cam-sony-a7iii", "prod-cam-sony-a7iv", "prod-cam-canon-r6"] }
+  ],
+  "customers": [
+    { "id": "cust-demo-raka", "name": "Raka Demo", "whatsapp": "+628110000001", "email": "raka@example.test", "isDemoCustomer": true },
+    { "id": "cust-nabila", "name": "Nabila Fiktif", "whatsapp": "+628110000002", "email": "nabila@example.test", "isDemoCustomer": false },
+    { "id": "cust-danu", "name": "Danu Fiktif", "whatsapp": "+628110000003", "isDemoCustomer": false }
+  ],
+  "bookings": [
+    {
+      "id": "booking-001", "reference": "SKB-20261001-0001", "customerId": "cust-demo-raka", "primaryServiceCategory": "camera",
+      "period": { "pickupAt": "2026-10-15T09:00:00+08:00", "returnAt": "2026-10-17T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-10-01T09:00:00+08:00", "updatedAt": "2026-10-01T09:05:00+08:00", "status": "confirmed", "paymentStatus": "deposit_paid", "guaranteeStatus": "required",
+      "lines": [{ "id": "line-001", "kind": "product", "itemId": "prod-cam-sony-a7iii", "nameSnapshot": "Sony Alpha A7 III Kit 28–70mm", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 350000 }],
+      "allocations": [{ "id": "alloc-001", "bookingId": "booking-001", "bookingLineId": "line-001", "inventoryUnitId": "CAM-A7III-001", "componentProductId": "prod-cam-sony-a7iii" }],
+      "pricing": { "billableDays": 2, "lines": [{ "lineId": "line-001", "name": "Sony Alpha A7 III Kit 28–70mm", "quantity": 1, "priceUnit": "per_day", "unitPrice": 350000, "total": 700000 }], "rentalSubtotal": 700000, "depositDue": 210000, "depositPaid": 210000, "remainingBalance": 490000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Raka Demo", "whatsapp": "+628110000001", "email": "raka@example.test" },
+      "timeline": [{ "id": "event-001", "at": "2026-10-01T09:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-002", "reference": "SKB-20260918-0002", "customerId": "cust-demo-raka", "primaryServiceCategory": "iphone",
+      "period": { "pickupAt": "2026-09-20T09:00:00+08:00", "returnAt": "2026-09-21T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-09-18T12:00:00+08:00", "updatedAt": "2026-09-21T11:00:00+08:00", "status": "completed", "paymentStatus": "paid_in_full", "guaranteeStatus": "returned",
+      "lines": [{ "id": "line-002", "kind": "product", "itemId": "prod-phone-13", "nameSnapshot": "iPhone 13 128GB", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 280000 }],
+      "allocations": [{ "id": "alloc-002", "bookingId": "booking-002", "bookingLineId": "line-002", "inventoryUnitId": "IPH-13-001", "componentProductId": "prod-phone-13", "releasedAt": "2026-09-21T11:00:00+08:00" }],
+      "pricing": { "billableDays": 1, "lines": [{ "lineId": "line-002", "name": "iPhone 13 128GB", "quantity": 1, "priceUnit": "per_day", "unitPrice": 280000, "total": 280000 }], "rentalSubtotal": 280000, "depositDue": 84000, "depositPaid": 280000, "remainingBalance": 0, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Raka Demo", "whatsapp": "+628110000001", "email": "raka@example.test" },
+      "timeline": [{ "id": "event-002", "at": "2026-09-18T12:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-003", "reference": "SKB-20261004-0003", "customerId": "cust-nabila", "primaryServiceCategory": "camera",
+      "period": { "pickupAt": "2026-10-06T09:00:00+08:00", "returnAt": "2026-10-07T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-10-04T09:50:00+08:00", "updatedAt": "2026-10-04T09:50:00+08:00", "holdExpiresAt": "2026-10-04T10:20:00+08:00", "status": "waiting_payment", "paymentStatus": "unpaid", "guaranteeStatus": "required",
+      "lines": [{ "id": "line-003", "kind": "product", "itemId": "prod-cam-sony-a7iv", "nameSnapshot": "Sony Alpha A7 IV Body", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 450000 }],
+      "allocations": [{ "id": "alloc-003", "bookingId": "booking-003", "bookingLineId": "line-003", "inventoryUnitId": "CAM-A7IV-001", "componentProductId": "prod-cam-sony-a7iv" }],
+      "pricing": { "billableDays": 1, "lines": [{ "lineId": "line-003", "name": "Sony Alpha A7 IV Body", "quantity": 1, "priceUnit": "per_day", "unitPrice": 450000, "total": 450000 }], "rentalSubtotal": 450000, "depositDue": 135000, "depositPaid": 0, "remainingBalance": 315000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Nabila Fiktif", "whatsapp": "+628110000002", "email": "nabila@example.test" },
+      "timeline": [{ "id": "event-003", "at": "2026-10-04T09:50:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-004", "reference": "SKB-20260930-0004", "customerId": "cust-danu", "primaryServiceCategory": "camera",
+      "period": { "pickupAt": "2026-10-01T09:00:00+08:00", "returnAt": "2026-10-03T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-09-30T08:00:00+08:00", "updatedAt": "2026-10-01T09:00:00+08:00", "status": "picked_up", "paymentStatus": "deposit_paid", "guaranteeStatus": "accepted",
+      "lines": [{ "id": "line-004", "kind": "product", "itemId": "prod-cam-canon-r6", "nameSnapshot": "Canon EOS R6 Body", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 400000 }],
+      "allocations": [{ "id": "alloc-004", "bookingId": "booking-004", "bookingLineId": "line-004", "inventoryUnitId": "CAM-R6-001", "componentProductId": "prod-cam-canon-r6" }],
+      "pricing": { "billableDays": 2, "lines": [{ "lineId": "line-004", "name": "Canon EOS R6 Body", "quantity": 1, "priceUnit": "per_day", "unitPrice": 400000, "total": 800000 }], "rentalSubtotal": 800000, "depositDue": 240000, "depositPaid": 240000, "remainingBalance": 560000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Danu Fiktif", "whatsapp": "+628110000003" },
+      "timeline": [{ "id": "event-004", "at": "2026-09-30T08:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-005", "reference": "SKB-20261002-0005", "customerId": "cust-nabila", "primaryServiceCategory": "iphone",
+      "period": { "pickupAt": "2026-10-04T15:00:00+08:00", "returnAt": "2026-10-05T15:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-10-02T10:00:00+08:00", "updatedAt": "2026-10-02T10:15:00+08:00", "status": "confirmed", "paymentStatus": "deposit_paid", "guaranteeStatus": "required",
+      "lines": [{ "id": "line-005", "kind": "product", "itemId": "prod-phone-14pro", "nameSnapshot": "iPhone 14 Pro 256GB", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 380000 }],
+      "allocations": [{ "id": "alloc-005", "bookingId": "booking-005", "bookingLineId": "line-005", "inventoryUnitId": "IPH-14P-001", "componentProductId": "prod-phone-14pro" }],
+      "pricing": { "billableDays": 1, "lines": [{ "lineId": "line-005", "name": "iPhone 14 Pro 256GB", "quantity": 1, "priceUnit": "per_day", "unitPrice": 380000, "total": 380000 }], "rentalSubtotal": 380000, "depositDue": 114000, "depositPaid": 114000, "remainingBalance": 266000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Nabila Fiktif", "whatsapp": "+628110000002", "email": "nabila@example.test" },
+      "timeline": [{ "id": "event-005", "at": "2026-10-02T10:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-006", "reference": "SKB-20261001-0006", "customerId": "cust-danu", "primaryServiceCategory": "camera",
+      "period": { "pickupAt": "2026-10-03T09:00:00+08:00", "returnAt": "2026-10-04T09:30:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-10-01T14:00:00+08:00", "updatedAt": "2026-10-04T09:30:00+08:00", "status": "returned", "paymentStatus": "paid_in_full", "guaranteeStatus": "returned",
+      "lines": [{ "id": "line-006", "kind": "product", "itemId": "prod-cam-sony-a7iii", "nameSnapshot": "Sony Alpha A7 III Kit 28–70mm", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 350000 }],
+      "allocations": [{ "id": "alloc-006", "bookingId": "booking-006", "bookingLineId": "line-006", "inventoryUnitId": "CAM-A7III-002", "componentProductId": "prod-cam-sony-a7iii" }],
+      "pricing": { "billableDays": 2, "lines": [{ "lineId": "line-006", "name": "Sony Alpha A7 III Kit 28–70mm", "quantity": 1, "priceUnit": "per_day", "unitPrice": 350000, "total": 700000 }], "rentalSubtotal": 700000, "depositDue": 210000, "depositPaid": 700000, "remainingBalance": 0, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Danu Fiktif", "whatsapp": "+628110000003" },
+      "timeline": [{ "id": "event-006", "at": "2026-10-01T14:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-007", "reference": "SKB-20260925-0007", "customerId": "cust-nabila", "primaryServiceCategory": "iphone",
+      "period": { "pickupAt": "2026-10-08T09:00:00+08:00", "returnAt": "2026-10-09T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-09-25T09:00:00+08:00", "updatedAt": "2026-09-26T09:00:00+08:00", "status": "cancelled", "paymentStatus": "refunded", "guaranteeStatus": "required",
+      "lines": [{ "id": "line-007", "kind": "product", "itemId": "prod-phone-13", "nameSnapshot": "iPhone 13 128GB", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 280000 }],
+      "allocations": [{ "id": "alloc-007", "bookingId": "booking-007", "bookingLineId": "line-007", "inventoryUnitId": "IPH-13-002", "componentProductId": "prod-phone-13", "releasedAt": "2026-09-26T09:00:00+08:00" }],
+      "pricing": { "billableDays": 1, "lines": [{ "lineId": "line-007", "name": "iPhone 13 128GB", "quantity": 1, "priceUnit": "per_day", "unitPrice": 280000, "total": 280000 }], "rentalSubtotal": 280000, "depositDue": 84000, "depositPaid": 84000, "remainingBalance": 196000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Nabila Fiktif", "whatsapp": "+628110000002", "email": "nabila@example.test" },
+      "timeline": [{ "id": "event-007", "at": "2026-09-25T09:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-008", "reference": "SKB-20261003-0008", "customerId": "cust-danu", "primaryServiceCategory": "camera",
+      "period": { "pickupAt": "2026-10-09T09:00:00+08:00", "returnAt": "2026-10-10T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-10-03T08:00:00+08:00", "updatedAt": "2026-10-03T08:30:00+08:00", "holdExpiresAt": "2026-10-03T08:30:00+08:00", "status": "expired", "paymentStatus": "expired", "guaranteeStatus": "required",
+      "lines": [{ "id": "line-008", "kind": "product", "itemId": "prod-cam-fuji-xt4", "nameSnapshot": "Fujifilm X-T4", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 320000 }],
+      "allocations": [{ "id": "alloc-008", "bookingId": "booking-008", "bookingLineId": "line-008", "inventoryUnitId": "CAM-XT4-001", "componentProductId": "prod-cam-fuji-xt4", "releasedAt": "2026-10-03T08:30:00+08:00" }],
+      "pricing": { "billableDays": 1, "lines": [{ "lineId": "line-008", "name": "Fujifilm X-T4", "quantity": 1, "priceUnit": "per_day", "unitPrice": 320000, "total": 320000 }], "rentalSubtotal": 320000, "depositDue": 96000, "depositPaid": 0, "remainingBalance": 224000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Danu Fiktif", "whatsapp": "+628110000003" },
+      "timeline": [{ "id": "event-008", "at": "2026-10-03T08:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-009", "reference": "SKB-20261003-0009", "customerId": "cust-nabila", "primaryServiceCategory": "iphone",
+      "period": { "pickupAt": "2026-10-10T09:00:00+08:00", "returnAt": "2026-10-12T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-10-03T11:00:00+08:00", "updatedAt": "2026-10-03T11:15:00+08:00", "status": "confirmed", "paymentStatus": "deposit_paid", "guaranteeStatus": "required",
+      "lines": [{ "id": "line-009", "kind": "product", "itemId": "prod-phone-15pro", "nameSnapshot": "iPhone 15 Pro 256GB", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 450000 }],
+      "allocations": [{ "id": "alloc-009", "bookingId": "booking-009", "bookingLineId": "line-009", "inventoryUnitId": "IPH-15P-001", "componentProductId": "prod-phone-15pro" }],
+      "pricing": { "billableDays": 2, "lines": [{ "lineId": "line-009", "name": "iPhone 15 Pro 256GB", "quantity": 1, "priceUnit": "per_day", "unitPrice": 450000, "total": 900000 }], "rentalSubtotal": 900000, "depositDue": 270000, "depositPaid": 270000, "remainingBalance": 630000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Nabila Fiktif", "whatsapp": "+628110000002", "email": "nabila@example.test" },
+      "timeline": [{ "id": "event-009", "at": "2026-10-03T11:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    },
+    {
+      "id": "booking-010", "reference": "SKB-20261004-0010", "customerId": "cust-danu", "primaryServiceCategory": "camera",
+      "period": { "pickupAt": "2026-10-20T09:00:00+08:00", "returnAt": "2026-10-21T09:00:00+08:00", "timezone": "Asia/Makassar" },
+      "createdAt": "2026-10-04T08:00:00+08:00", "updatedAt": "2026-10-04T08:15:00+08:00", "status": "rejected", "paymentStatus": "unpaid", "guaranteeStatus": "required",
+      "lines": [{ "id": "line-010", "kind": "product", "itemId": "prod-lens-sony-50", "nameSnapshot": "Sony FE 50mm f/1.8", "quantity": 1, "priceUnit": "per_day", "unitPriceSnapshot": 100000 }],
+      "allocations": [{ "id": "alloc-010", "bookingId": "booking-010", "bookingLineId": "line-010", "inventoryUnitId": "LENS-50-001", "componentProductId": "prod-lens-sony-50", "releasedAt": "2026-10-04T08:15:00+08:00" }],
+      "pricing": { "billableDays": 1, "lines": [{ "lineId": "line-010", "name": "Sony FE 50mm f/1.8", "quantity": 1, "priceUnit": "per_day", "unitPrice": 100000, "total": 100000 }], "rentalSubtotal": 100000, "depositDue": 30000, "depositPaid": 0, "remainingBalance": 70000, "currency": "IDR", "policyVersion": "demo-policy-v1" },
+      "customerSnapshot": { "name": "Danu Fiktif", "whatsapp": "+628110000003" },
+      "timeline": [{ "id": "event-010", "at": "2026-10-04T08:00:00+08:00", "actor": "demo_customer", "label": "Booking dibuat" }]
+    }
+  ],
+  "availabilityBlocks": [
+    {
+      "id": "block-maintenance-a7iii-003",
+      "inventoryUnitId": "CAM-A7III-003",
+      "reason": "maintenance",
+      "period": { "pickupAt": "2026-10-10T08:00:00+08:00", "returnAt": "2026-10-12T18:00:00+08:00", "timezone": "Asia/Makassar" },
+      "note": "Perawatan rutin demo; tidak memuat data pelanggan.",
+      "createdAt": "2026-10-01T08:00:00+08:00"
+    },
+    {
+      "id": "block-iphone-unavailable",
+      "inventoryUnitId": "IPH-15P-002",
+      "reason": "internal_use",
+      "period": { "pickupAt": "2026-10-10T08:00:00+08:00", "returnAt": "2026-10-12T18:00:00+08:00", "timezone": "Asia/Makassar" },
+      "note": "Blok deterministik skenario demo.",
+      "createdAt": "2026-10-01T08:05:00+08:00"
+    }
+  ],
+  "demoScenarios": [
+    { "id": "happy-camera-package", "label": "Booking paket kamera berhasil", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/", "mode": "normal" },
+    { "id": "iphone-unavailable", "label": "iPhone tidak tersedia", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/search", "mode": "normal" },
+    { "id": "final-check-conflict", "label": "Konflik pemeriksaan akhir", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/checkout", "mode": "final_conflict" },
+    { "id": "payment-pending-success", "label": "Pembayaran tertunda lalu berhasil", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/bookings/booking-003/payment", "mode": "normal" },
+    { "id": "payment-failed-retry", "label": "Pembayaran gagal lalu dicoba lagi", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/bookings/booking-003/payment", "mode": "normal" },
+    { "id": "payment-expired", "label": "Masa tahan pembayaran berakhir", "asOf": "2026-10-04T10:30:00+08:00", "startRoute": "/bookings/booking-003/payment", "mode": "normal" },
+    { "id": "empty-history", "label": "Riwayat booking kosong", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/my-bookings", "mode": "empty" },
+    { "id": "loading-state", "label": "Status memuat terkontrol", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/search", "mode": "loading" },
+    { "id": "recoverable-error", "label": "Kesalahan yang dapat dipulihkan", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/search", "mode": "recoverable_error" },
+    { "id": "maintenance-block", "label": "Blok perawatan unit", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/admin/availability-blocks/new", "mode": "normal" },
+    { "id": "admin-overview-populated", "label": "Ringkasan admin berisi data", "asOf": "2026-10-04T10:00:00+08:00", "startRoute": "/admin", "mode": "normal" },
+    { "id": "admin-overview-empty", "label": "Ringkasan admin kosong", "asOf": "2027-01-04T10:00:00+08:00", "startRoute": "/admin", "mode": "empty" }
+  ],
+  "locationAndPolicyCopy": {
+    "timezone": "Asia/Makassar",
+    "operatingHours": "08.00–21.00 WITA (provisional)",
+    "pickupLocation": "Lokasi counter Balikpapan akan dikonfirmasi",
+    "guaranteeNotice": "Bawa dokumen jaminan asli saat pengambilan. Jenis dokumen yang diterima akan dikonfirmasi.",
+    "policyVersion": "demo-policy-v1",
+    "provisional": true
+  }
+}
