@@ -59,14 +59,18 @@ function bookingBlocks(booking: Booking, asOf: DateTimeIso): boolean {
   return true
 }
 
-function unitIsBlocked(
+export type UnitConflict =
+  | { kind: 'booking'; booking: Booking }
+  | { kind: 'block'; block: AvailabilityBlock }
+
+export function findUnitConflict(
   unitId: string,
   requestedPeriod: RentalPeriod,
   bookings: Booking[],
   availabilityBlocks: AvailabilityBlock[],
   asOf: DateTimeIso,
-): boolean {
-  const bookingConflict = bookings.some(
+): UnitConflict | undefined {
+  const bookingConflict = bookings.find(
     (booking) =>
       bookingBlocks(booking, asOf) &&
       booking.allocations.some(
@@ -77,13 +81,12 @@ function unitIsBlocked(
         returnAt: addWitaMinutes(booking.period.returnAt, INSPECTION_BUFFER_MINUTES),
       }),
   )
+  if (bookingConflict) return { kind: 'booking', booking: bookingConflict }
 
-  return (
-    bookingConflict ||
-    availabilityBlocks.some(
-      (block) => block.inventoryUnitId === unitId && overlaps(requestedPeriod, block.period),
-    )
+  const blockConflict = availabilityBlocks.find(
+    (block) => block.inventoryUnitId === unitId && overlaps(requestedPeriod, block.period),
   )
+  return blockConflict ? { kind: 'block', block: blockConflict } : undefined
 }
 
 export function allocateRequirements(input: {
@@ -110,7 +113,7 @@ export function allocateRequirements(input: {
           unit.lifecycle === 'active' &&
           !reserved.has(unit.id) &&
           (requirement.variantTags ?? []).every((tag) => unit.variantTags.includes(tag)) &&
-          !unitIsBlocked(
+          !findUnitConflict(
             unit.id,
             input.period,
             input.bookings,

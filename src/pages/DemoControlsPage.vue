@@ -8,7 +8,7 @@ import { activateScenario, listScenarios, resetDemo } from '@/services/scenario'
 import { useDemoStore } from '@/stores/demo'
 
 const router = useRouter(); const demo = useDemoStore()
-const milestoneIds = new Set(['happy-camera-package', 'iphone-unavailable', 'final-check-conflict', 'payment-pending-success', 'payment-failed-retry', 'payment-expired', 'empty-history', 'loading-state', 'recoverable-error', 'admin-overview-populated', 'admin-overview-empty'])
+const milestoneIds = new Set(['happy-camera-package', 'iphone-unavailable', 'final-check-conflict', 'payment-pending-success', 'payment-failed-retry', 'payment-expired', 'empty-history', 'loading-state', 'recoverable-error', 'admin-overview-populated', 'admin-overview-empty', 'maintenance-block'])
 const scenarios = computed(() => listScenarios().filter(scenario => milestoneIds.has(scenario.id)))
 function start(scenario: DemoScenario) {
   demo.state = activateScenario(scenario.id)

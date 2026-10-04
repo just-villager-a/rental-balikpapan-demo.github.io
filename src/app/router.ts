@@ -14,6 +14,8 @@ import DemoControlsPage from '@/pages/DemoControlsPage.vue'
 import AdminOverviewPage from '@/pages/AdminOverviewPage.vue'
 import AdminBookingListPage from '@/pages/AdminBookingListPage.vue'
 import AdminBookingDetailPage from '@/pages/AdminBookingDetailPage.vue'
+import AdminCalendarPage from '@/pages/AdminCalendarPage.vue'
+import AvailabilityBlockPage from '@/pages/AvailabilityBlockPage.vue'
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +35,8 @@ export const router = createRouter({
     { path: '/my-bookings', name: 'customer-bookings', component: BookingHistoryPage },
     { path: '/my-bookings/:bookingId', name: 'customer-booking-detail', component: BookingDetailPage },
     { path: '/admin', name: 'admin-overview', component: AdminOverviewPage },
+    { path: '/admin/calendar', name: 'admin-calendar', component: AdminCalendarPage },
+    { path: '/admin/availability-blocks/new', name: 'admin-block-new', component: AvailabilityBlockPage },
     { path: '/admin/bookings', name: 'admin-bookings', component: AdminBookingListPage },
     { path: '/admin/bookings/:bookingId', name: 'admin-booking-detail', component: AdminBookingDetailPage },
     { path: '/demo', name: 'demo-controls', component: DemoControlsPage },

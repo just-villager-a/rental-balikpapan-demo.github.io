@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import AdminOverviewPage from '@/pages/AdminOverviewPage.vue'
 import AdminBookingListPage from '@/pages/AdminBookingListPage.vue'
 import ConfirmDialog from '@/components/ConfirmDialog.vue'
+import AvailabilityBlockPage from '@/pages/AvailabilityBlockPage.vue'
 import { activateScenario } from '@/services/scenario'
 import { getDemoStateService } from '@/services/mockServices'
 
@@ -14,6 +15,7 @@ function router() { return createRouter({ history: createMemoryHistory(), routes
   { path: '/', component: stub }, { path: '/demo', component: stub },
   { path: '/admin', component: AdminOverviewPage }, { path: '/admin/bookings', component: AdminBookingListPage },
   { path: '/admin/bookings/:bookingId', component: stub },
+  { path: '/admin/calendar', component: stub }, { path: '/admin/availability-blocks/new', component: AvailabilityBlockPage },
 ] }) }
 
 beforeEach(() => getDemoStateService().reset())
@@ -52,5 +54,20 @@ describe('admin pages', () => {
     expect(wrapper.text()).toContain('SKB-20261004-0003')
     expect(wrapper.text()).toContain('SKB-20261004-0010')
     expect(wrapper.text()).not.toContain('SKB-20261001-0001')
+  })
+
+  it('focuses block validation errors and renders a successful creation state', async () => {
+    const appRouter = router(); await appRouter.push('/admin/availability-blocks/new'); await appRouter.isReady()
+    const wrapper = mount(AvailabilityBlockPage, { attachTo: document.body, global: { plugins: [createPinia(), appRouter] } })
+    await wrapper.get('form').trigger('submit')
+    await flushPromises()
+    expect(wrapper.get('[role="alert"]').text()).toContain('Lengkapi')
+    expect(document.activeElement).toBe(wrapper.get('[role="alert"]').element)
+
+    await wrapper.get('select').setValue('CAM-A7III-001')
+    await wrapper.get('form').trigger('submit')
+    await flushPromises()
+    expect(wrapper.get('[role="status"]').text()).toContain('berhasil dibuat')
+    wrapper.unmount()
   })
 })

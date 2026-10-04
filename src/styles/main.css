@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "@fullcalendar/vue3/skeleton.css";
+@import "@fullcalendar/vue3/themes/classic/theme.css";
+@import "@fullcalendar/vue3/themes/classic/palette.css";
 
 @theme {
   --color-brand-yellow: #fff21f;
@@ -76,4 +78,17 @@ button, select { cursor: pointer; }
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+.admin-calendar .fc { --fc-border-color: var(--color-sand); --fc-button-bg-color: var(--color-ink); --fc-button-border-color: var(--color-ink); --fc-button-hover-bg-color: var(--color-charcoal); --fc-button-active-bg-color: var(--color-brand-yellow); --fc-button-active-border-color: var(--color-ink); --fc-button-active-text-color: var(--color-ink); font-size: .82rem; }
+.admin-calendar .fc .fc-toolbar { align-items: center; gap: .75rem; }
+.admin-calendar .fc .fc-toolbar-title { font-size: 1rem; font-weight: 900; }
+.admin-calendar .fc .fc-button { min-height: 40px; border-radius: .5rem; font-weight: 800; text-transform: capitalize; }
+.admin-calendar .fc .fc-event { cursor: pointer; border-radius: .35rem; padding: 1px 2px; font-weight: 700; }
+.admin-calendar .fc .fc-list-event-title a { white-space: normal; }
+
+@media (max-width: 767px) {
+  .admin-calendar .fc .fc-toolbar { align-items: stretch; flex-direction: column; }
+  .admin-calendar .fc .fc-toolbar-chunk { display: flex; justify-content: center; }
+  .admin-calendar .fc .fc-toolbar-title { padding-block: .25rem; }
 }
