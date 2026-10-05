@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 import LandingPage from '@/pages/LandingPage.vue'
 import PackageDetailPage from '@/pages/PackageDetailPage.vue'
@@ -18,7 +18,7 @@ import AdminCalendarPage from '@/pages/AdminCalendarPage.vue'
 import AvailabilityBlockPage from '@/pages/AvailabilityBlockPage.vue'
 
 export const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
